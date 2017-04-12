@@ -1,0 +1,7 @@
+
+*  Algorithms and Data Structures Workspace.
+Compilation of programs that I'm writing to learn algorithms and data structures.
+
+** Data Structures
+*** graph_coloring.c
+Basic representation of linked list, set and graph data structures. Just enough complexity to get a simple greedy graph coloring algorithm working.
