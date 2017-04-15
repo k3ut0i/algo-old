@@ -5,3 +5,5 @@ gmon.out
 *\~
 
 graph_coloring
+*.o
+test_graph_coloring

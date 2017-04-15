@@ -3,5 +3,26 @@
 Compilation of programs that I'm writing to learn algorithms and data structures.
 
 ** Data Structures
-*** graph_coloring.c
-Basic representation of linked list, set and graph data structures. Just enough complexity to get a simple greedy graph coloring algorithm working.
+*** graph coloring notes
+Complete the graph coloring example with greedy and all possibilities checking optimal version. Don't try to optimize the algorithms and data structures, just make sure the logic is working. Optimization can wait until you complete the BOOK. Spent a lot of time making sure there are no memory leaks for my data structure implementations, but still couldn't get perfect it. At least it's working partially. Now onto the greedy algorithm.
+
+#+BEGIN_SRC lisp
+  (defclass graph ()
+    ((nodes :accessor nodes
+	    :initarg :nodes)))
+  (defclass node ()
+    ((uid :accessor uid
+	  :initarg :uid)
+     (neighbors :accessor neighbors
+		:initarg :neighbors)))
+
+  (defmethod greedy-algorithm ((g graph))
+    "greedy color the graph G with minimum amount of color"
+    (let ((all-color-set '()))
+      (dolist (n (nodes g))
+	(if (eql (set-difference all-color-set (mapcar #'color (neighbors n)))
+		 '())
+            (push (new-color) all-color-set)))
+      (length all-color-set)))
+#+END_SRC
+
