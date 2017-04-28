@@ -14,4 +14,7 @@ void  set_difference(SET*, SET*, SET*);
 unsigned int set_size(SET*);
 void destroy_set(SET*);
 
+/* enumerate a set of SIZE with natural numbers as items */
+void enumerate_set(unsigned long*, SET*);
+
 #endif

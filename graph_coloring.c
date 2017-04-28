@@ -1,6 +1,14 @@
 #include "graph_coloring.h"
 
 /* memory freeing functions */
+int unsigned_long_equality(void *l, void* r){
+  unsigned long left = *(unsigned long*)l;
+  unsigned long right = *(unsigned long*)r;
+  if(left > right) return 1;
+  else if(left < right) return -1;
+  else return 0;
+}
+
 
 void greedy_color_graph(GRAPH* g, char* of){
   assert(g!=NULL);
@@ -14,9 +22,12 @@ void greedy_color_graph(GRAPH* g, char* of){
   while(l!=NULL){
     NODE* n = l->head;
     /* check if there is a set which has no neighbors of n */
-    SET* diff_set = malloc(sizeof(SET));
-    set_difference(current_colored_nodes, n->neighbors, diff_set);
-    if(set_size(diff_set) > 0)
+    LIST* s = n->neighbors->elements;
+    while(s!=NULL){
+      
+      s = s->tail;;
+    }
+
     l = l->tail;
   }
 }
