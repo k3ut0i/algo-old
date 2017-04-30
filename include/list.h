@@ -1,7 +1,10 @@
+#include <stdio.h>
+
 #ifndef LIST_H
 #define LIST_H
 
-/* double linked list */
+/* double linked list cells*/
+/* this structure must only be create within this file. use list operations outside. */
 struct list_cell {
   /* only refer to data that can be owned by list_cell.
  if external data just reference a pointer to the data. */
@@ -27,11 +30,12 @@ struct list_cell* list_prev(unsigned long, LIST*);
 
 
 unsigned long list_length(LIST*);
-void list_dump(LIST*, void (*)(void*));
-void list_dump_to(LIST*, void (*) (void*), int);
+void list_dump(LIST*, char* (*)(void*));
+void list_dump_to(LIST*, char* (*) (void*), FILE*);
 void list_purge(LIST*);
 /* populate a list with a given array of numbers*/
 void populate_list(unsigned long*, LIST*);
 
+/* data owned by all list cells are freed.  */
 void destroy_list(LIST*);
 #endif

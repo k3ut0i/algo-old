@@ -19,7 +19,25 @@ static void null_test_success(void** state)
 
 static void list_insert_test(LIST*);
 static void list_retrieve_test(LIST*);
-static void list_dump_test(LIST*);
+
+char* print_string(void* s){
+  return (char*) s;
+}
+void __wrap_list_dump(LIST* l){
+  check_expected_ptr(l);
+}
+
+static void list_dump_test(char* f){
+
+  LIST* l = malloc(sizeof(LIST));
+  char* line = malloc(100 * sizeof(char));
+  FILE *infile = fopen(f, "r");
+  while(fscanf(infile, "%s\n", line)){
+    list_insert(line, l->end_pos, l);
+  }
+  FILE *outfile = fopen((strcat (f, ".list_dump")), "r");
+  list_dump_to(l, print_string, outfile);
+}
 
 /* write a simple search algorithm that tests list for searching and sorting. */
 static void list_search_test(LIST*);

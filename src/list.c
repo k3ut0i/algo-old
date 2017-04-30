@@ -121,11 +121,14 @@ void populate_list(unsigned long* num, LIST* l){
 
 }
 
-void dump_list(LIST* l, void (*dump_item) (void*)){
+void list_dump(LIST* l, char* (*dump_item) (void*)){
+  list_dump_to(l, dump_item, stdout);
+}
+
+void list_dump_to(LIST* l , char* (*dump_item) (void*), FILE* f){
   struct list_cell* c = l->first;
   while(c != l->last){
-    printf("->");
-    dump_item(c->data);
+    fprintf(f, "->%s", dump_item(c->data));
     c = c->next;
   }
 }

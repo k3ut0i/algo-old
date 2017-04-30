@@ -7,3 +7,9 @@ gmon.out
 graph_coloring
 *.o
 test_graph_coloring
+build
+CMakeCache.txt
+CMakeFiles
+CTestTestfile.cmake
+DartConfiguration.tcl
+cmake_install.cmake
