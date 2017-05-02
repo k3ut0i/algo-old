@@ -22,6 +22,7 @@ typedef struct list{
 }LIST;
 
 
+LIST* list_create(int (*) (void*, void*));
 int list_insert(void*, unsigned long, LIST*);
 unsigned long list_locate(void*, LIST*);
 struct list_cell* list_retrieve(unsigned long, LIST*);

@@ -1,7 +1,6 @@
-
 *  Algorithms and Data Structures Workspace.
 Compilation of programs that I'm writing to learn algorithms and data structures.
-
+These are just implementation notes.
 ** Data Structures
 *** graph coloring notes
 Complete the graph coloring example with greedy and all possibilities checking optimal version. Don't try to optimize the algorithms and data structures, just make sure the logic is working. Optimization can wait until you complete the BOOK. Spent a lot of time making sure there are no memory leaks for my data structure implementations, but still couldn't get perfect it. At least it's working partially. Now onto the greedy algorithm.

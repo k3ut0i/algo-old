@@ -3,8 +3,9 @@
 #include <setjmp.h>
 #include <cmocka.h>
 
-
-#include "list.h"
+#include <error.h>
+#include <errno.h>
+#include <list.h>
 #include <libguile.h>
 
 /* This testing process works by working two different programs,
@@ -29,20 +30,37 @@ void __wrap_list_dump(LIST* l){
 
 static void list_dump_test(char* f){
 
-  LIST* l = malloc(sizeof(LIST));
+  LIST* l = list_create(NULL);
+  
   char* line = malloc(100 * sizeof(char));
   FILE *infile = fopen(f, "r");
-  while(fscanf(infile, "%s\n", line)){
-    list_insert(line, l->end_pos, l);
-  }
-  FILE *outfile = fopen((strcat (f, ".list_dump")), "r");
+  if(infile == NULL) error(-1, EBADF, "%s\n", f);
+  int rval = 0;
+  do{
+    rval = fscanf(infile, "%s\n", line);
+    /* new memory that just belongs to the list */
+    char* data = (malloc (strlen(line) + 1));
+    strcpy(data, line);
+    if(rval != EOF) list_insert(data, l->end_pos, l);
+  }while (rval  != EOF);
+  fclose(infile);
+  
+  char* outfilename = malloc(30 * sizeof(char));
+  outfilename[0] = '\0';
+  strcat(outfilename, f);
+  strcat(outfilename,"__TEST");
+  FILE *outfile = fopen(outfilename, "w");
+  if(outfile == NULL) error(-1, EBADF, "%s\n", outfilename);
   list_dump_to(l, print_string, outfile);
+  fclose(outfile);
+  destroy_list(l);
 }
 
 /* write a simple search algorithm that tests list for searching and sorting. */
 static void list_search_test(LIST*);
 
 int main(void){
+  list_dump_test("resources/simple.list");
   const struct CMUnitTest tests[] = {cmocka_unit_test(null_test_success)};
   return cmocka_run_group_tests(tests, NULL, NULL);
 }

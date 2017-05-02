@@ -5,6 +5,17 @@
 
 
 /* list functions */
+
+/* create a empty list with an ordering function */
+LIST* list_create(int (*f)(void*, void*))
+{
+  LIST* l = malloc(sizeof(LIST));
+  l->first = NULL;
+  l->last = NULL;
+  l->end_pos = 0;
+  l->ord = f;
+  return l;
+}
 unsigned long list_length(LIST* l)
 {
   assert(l!=NULL);
@@ -31,8 +42,15 @@ int list_insert(void* data, unsigned long pos, LIST* l)
     {
       new_cell->prev = NULL;
       new_cell->next = l->first;
-      l->first->prev = new_cell;
-      l->first = new_cell;
+      if(l->end_pos != 0){
+	l->first->prev = new_cell;
+	l->first = new_cell;
+      }
+      else {/* inserting first element of empty list */
+	l->first = new_cell;
+	l->last = new_cell;
+      }
+      l->end_pos++;
       return pos;
     }
   else if (pos > 0 && pos < l->end_pos)
@@ -46,6 +64,7 @@ int list_insert(void* data, unsigned long pos, LIST* l)
       new_cell->next = c;
       c->prev->next = new_cell;
       c->prev = new_cell;
+      l->end_pos++;
       return pos;
     }
   else if (pos == l->end_pos)
@@ -54,6 +73,7 @@ int list_insert(void* data, unsigned long pos, LIST* l)
       new_cell->prev = l->last;
       l->last->next = new_cell;
       l->last = new_cell;
+      l->end_pos++;
       return pos;
     }
   else return -1;
