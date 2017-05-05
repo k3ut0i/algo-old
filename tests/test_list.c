@@ -18,8 +18,14 @@ static void null_test_success(void** state)
   (void) state;
 }
 
-static void list_insert_test(LIST*);
-static void list_retrieve_test(LIST*);
+static void list_insert_retrieve_test(LIST* l)
+{
+  /* read an array of values from a file.
+     insert those values into the list. 
+     check if the insertion is valid using list_retrive func
+ */
+}
+
 
 char* print_string(void* s){
   return (char*) s;
@@ -52,6 +58,9 @@ static void list_dump_test(char* f){
   FILE *outfile = fopen(outfilename, "w");
   if(outfile == NULL) error(-1, EBADF, "%s\n", outfilename);
   list_dump_to(l, print_string, outfile);
+
+  free(line);
+  free(outfilename);
   fclose(outfile);
   destroy_list(l);
 }

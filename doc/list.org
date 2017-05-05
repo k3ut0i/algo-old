@@ -1,0 +1,5 @@
+* sequential lists
+This document consists of implementation specifics of sequential lists, more specifically doubly linked lists rather than arrays, and a few use cases of such lists.
+** doubly linked lists
+** use cases
+*** naive bubble sort

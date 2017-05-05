@@ -1,27 +1,21 @@
-*  Algorithms and Data Structures Workspace.
-Compilation of programs that I'm writing to learn algorithms and data structures.
-These are just implementation notes.
-** Data Structures
-*** graph coloring notes
-Complete the graph coloring example with greedy and all possibilities checking optimal version. Don't try to optimize the algorithms and data structures, just make sure the logic is working. Optimization can wait until you complete the BOOK. Spent a lot of time making sure there are no memory leaks for my data structure implementations, but still couldn't get perfect it. At least it's working partially. Now onto the greedy algorithm.
+* Work-space for implementing algorithms and data structures
 
-#+BEGIN_SRC lisp
-  (defclass graph ()
-    ((nodes :accessor nodes
-	    :initarg :nodes)))
-  (defclass node ()
-    ((uid :accessor uid
-	  :initarg :uid)
-     (neighbors :accessor neighbors
-		:initarg :neighbors)))
+This project is an attempt to gain skills in low level programming with memory management, awareness of structures and algorithms that work on this level. Most non-trivial algorithm will also be implemented in scheme to check against working programs. The scope of the project is very open this project is expected to continue for quite a while. 
+** Documentation
+The documentation is expected to be compiled for blog posting on each topic, so the working status may take a while. Current notes regarding implementation, testing and theory of each individual topic can be found in the /doc/ sub folder of the project.
+** Testing
+Testing the data structures and algorithms is to be done extensively. In the current model a test is written with cmocka or cunit which operates over a input and the result is verified with the /scheme/ program, which implements the same logic, operating over the same input.
 
-  (defmethod greedy-algorithm ((g graph))
-    "greedy color the graph G with minimum amount of color"
-    (let ((all-color-set '()))
-      (dolist (n (nodes g))
-	(if (eql (set-difference all-color-set (mapcar #'color (neighbors n)))
-		 '())
-            (push (new-color) all-color-set)))
-      (length all-color-set)))
-#+END_SRC
+#+begin_src plantuml :file testing.svg
+  start
+  :cmocka or cunit test;
+  :scheme program;
+  if (equivalent results?) then (yes)
+  :passed;
+  else (no)
+  :failed;
+  end
+#+end_src
 
+#+RESULTS:
+[[file:testing.svg]]

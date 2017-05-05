@@ -7,8 +7,8 @@
 (define (insert-test filename)
   (call-with-input-file filename
     (lambda (input-port)
-      (let loop ((result ()))
-	(let ((line (read-line input-port)))
+      (let loop ((result '()))
+	(let ((line (read input-port)))
 	  (if (eof-object? line)
 	      result
 	      (loop (cons line result))))))))
@@ -24,4 +24,4 @@
   ())
 
 (define (sort-test filename)
-  ())
+  '())
