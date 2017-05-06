@@ -10,7 +10,7 @@ add_library(list src/list.c)
 
 #add_executable(simple_guile tests/test_graph_coloring.c)
 add_executable(test_list tests/test_list.c)
-target_link_libraries (test_list cmocka list)
+target_link_libraries (test_list cmocka list guile-2.0)
 
 # enable debugging
 add_definitions (-ggdb)

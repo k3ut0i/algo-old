@@ -1,3 +1,5 @@
+(use-modules (ice-9 rdelim))
+
 (define (print-list size)
   (if (zero? size)
       (quote ())
@@ -15,13 +17,22 @@
 
 ;; resolve stubs
 (define (retrieve-test filename)
-  ())
+  '())
 
-(define (dump-test filename)
-  ())
+(define (list-dump filename)
+  (let ((flist (call-with-input-file filename
+		 (lambda (input-port)
+		   (let loop ((result '()))
+		     (let ((line (read-line input-port)))
+		       (if (eof-object? line)
+			   result
+			   (loop (cons line result)))))))))
+    (string-join (reverse flist)
+		 "->"
+		 'prefix)))
 
 (define (search-test filename)
-  ())
+  '())
 
 (define (sort-test filename)
   '())

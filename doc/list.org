@@ -3,3 +3,6 @@ This document consists of implementation specifics of sequential lists, more spe
 ** doubly linked lists
 ** use cases
 *** naive bubble sort
+*** INIT basic tests [0/2]
+- [ ] insert, retrieve
+- [ ] purge

@@ -79,7 +79,7 @@ int list_insert(void* data, unsigned long pos, LIST* l)
   else return -1;
 }
 
-void destroy_list(LIST* l)
+void list_destroy(LIST* l)
 {
   if(l == NULL) return;
   struct list_cell* c = l->first;
@@ -147,8 +147,10 @@ void list_dump(LIST* l, char* (*dump_item) (void*)){
 
 void list_dump_to(LIST* l , char* (*dump_item) (void*), FILE* f){
   struct list_cell* c = l->first;
+  fprintf(f, "list dump: %p\n[", l);
   while(c != l->last){
     fprintf(f, "->%s", dump_item(c->data));
     c = c->next;
   }
+  fprintf(f, "]\n");
 }

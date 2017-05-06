@@ -38,5 +38,5 @@ void list_purge(LIST*);
 void populate_list(unsigned long*, LIST*);
 
 /* data owned by all list cells are freed.  */
-void destroy_list(LIST*);
+void list_destroy(LIST*);
 #endif
